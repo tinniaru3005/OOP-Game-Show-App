@@ -24,13 +24,27 @@ class Game {
     }
 
     checkForWin(letter) {
-        let phraseLetters = document.getElementsByClassName("letter");
-        let shownLetters = document.getElementsByClassName("show");
+        let phraseLetters = document.getElementsByClassName('letter');
+        let shownLetters = document.getElementsByClassName('show');
         if(shownLetters.length === phraseLetters.length) {
             return true; 
         } else {
             return false; 
         }
+    }
+
+    gameOver(gameWon) {
+        const screenOverlay = document.getElementById("overlay");
+        let gameOverMessage = document.getElementById('game-over-message');
+        screenOverlay.style.display = '';
+        if(gameWon) {
+            screenOverlay.className = 'win';
+           gameOverMessage.innerHTML = `Great job, you've correctly figured out the phrase!`;
+        } else {
+            screenOverlay.className = 'lose';
+            gameOverMessage.innerHTML = `Bummer, you didn't correctly figure out the phrase. Give it another shot!`;
+        }
+        this.resetGame();
     }
 
     removeLife() {
