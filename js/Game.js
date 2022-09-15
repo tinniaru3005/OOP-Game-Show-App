@@ -8,6 +8,11 @@ class Game {
             new Phrase('Make it happen'), 
             new Phrase('Be kind')
         ];
-        this.activePhrase = null; 
+        this.activePhrase = null;
+    }
+
+    getRandomPhrase() {
+        const randomPhrase = Math.floor(Math.random() * this.phrases.length);
+        return this.phrases[randomPhrase]; 
     }
 }
