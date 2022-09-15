@@ -1,91 +1,98 @@
 class Game {
-    constructor(){
-        this.missed = 0;
-        this.phrases = [
-            new Phrase('Set yourself free'),
-            new Phrase('Day dreamer'), 
-            new Phrase('Know your worth'), 
-            new Phrase('Make it happen'), 
-            new Phrase('Be kind')
-        ];
-        this.activePhrase = null;
-    }
-
-    getRandomPhrase() {
-        const randomPhrase = Math.floor(Math.random() * this.phrases.length);
-        return this.phrases[randomPhrase]; 
-    }
-
-    startGame(phrase) {
-        let startScreenOverlay = document.getElementById('overlay');
-        startScreenOverlay.style.display = 'none';
-        this.activePhrase = this.getRandomPhrase();
-        return this.activePhrase.addPhraseToDisplay();
-    }
-
-    checkForWin(letter) {
-        let phraseLetters = document.getElementsByClassName('letter');
-        let shownLetters = document.getElementsByClassName('show');
-        if (shownLetters.length === phraseLetters.length) {
-            return true; 
-        } else {
-            return false; 
-        }
-    }
-
-    resetGame() {
-        const phrase = document.getElementById('phrase');
-        const resetHearts = document.querySelectorAll('.tries img');
-        const keyboard = document.getElementById('qwerty');
-        const button = qwerty.getElementsByTagName('button');
-        phrase.querySelector('ul').innerHTML = '';
-        this.missed = 0;
-        for (let i = 0; i < button.length; i++) {
-          button[i].disabled = false;
-          button[i].classList.remove('chosen', 'wrong');
-        }
-        for (let i = 0; i < resetHearts.length; i++) {
-          resetHearts[i].src = 'images/liveHeart.png';
-        }
-        this.missed = 0;
+    constructor() {
+      this.missed = 0;
+      this.phrases = this.createPhrases();
+      this.activePhrase = null;
     }
     
-    gameOver(gameWon) {
-        const screenOverlay = document.getElementById("overlay");
-        let gameOverMessage = document.getElementById('game-over-message');
-        screenOverlay.style.display = '';
-        if (gameWon) {
-            screenOverlay.className = 'win';
-           gameOverMessage.innerHTML = `Congratulations! That's the correct phrase!`;
-        } else {
-            screenOverlay.className = 'lose';
-            gameOverMessage.innerHTML = `Sorry, That's not the correct phrase. Try again.`;
-        }
-        this.resetGame();
+    createPhrases() {
+      const phrases = [
+        new Phrase("Life is like a box of chocolates"),
+        new Phrase("There is no trying"),
+        new Phrase("May the force be with you"),
+        new Phrase("Be kind"),
+        new Phrase("Dream big"),
+      ];
+      return phrases;
     }
-
+  
+    getRandomPhrase() {
+      let randomPhrase = Math.floor(Math.random() * this.phrases.length);
+      return this.phrases[randomPhrase];
+    }
+    
+    startGame() {
+      document.querySelector("div#overlay").style.display = "none";
+      this.getRandomPhrase();
+      this.activePhrase = this.getRandomPhrase();
+      this.activePhrase.addPhraseToDisplay();
+    }
+  
+    checkForWin() {
+      const letterLeft = document.querySelectorAll(".hide");
+      if (letterLeft.length === 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    
     removeLife() {
-        const heartsLeft = document.querySelectorAll('img');
-        if (this.missed < 4) {
-            heartsLeft[this.missed].src = 'images/lostHeart.png';
-            this.missed += 1
-        } else {
-            this.gameOver();
-        }
+      this.missed++;
+      let lives = document.querySelector(".tries");
+      let heart = lives.firstChild;
+      lives.classList.remove("tries");
+      heart.src = "images/lostHeart.png";
+      if (this.missed === 5) {
+        this.gameOver();
+      }
     }
-
+  
+    gameOver(gameWon) {
+      const overLay = document.getElementById("overlay");
+      overLay.style.display = "";
+      overLay.style.opacity = 1;
+      const gameOverMessage = document.getElementById("game-over-message");
+      if (gameWon) {
+        overLay.className = "win";
+        gameOverMessage.textContent =
+          "Can you guess the phrase Winner? Congratulations !!";
+      } else {
+        overLay.className = "lose";
+        gameOverMessage.textContent = "Sorry try again";
+      }
+    }
+    
     handleInteraction(button) {
-        button.disabled = true;
-        if (!this.activePhrase.phrase.includes(button.textContent)) {
-            button.className = 'wrong';
-            this.removeLife();
-        } else {
-            button.className = 'chosen';
-            this.activePhrase.showMatchedLetter(button.textContent);
-            this.checkForWin()
-            if(this.checkForWin()) {
-                this.gameOver(true) 
-            }
+      console.log(button);
+      button.disabled = true;
+      const chosenLetter = this.activePhrase.checkLetter(button.textContent);
+      if (!chosenLetter) {
+        button.classList.add("wrong");
+        this.removeLife();
+      } else {
+        button.classList.add("chosen");
+        this.activePhrase.showMatchedLetter(button.textContent);
+        if (this.checkForWin()) {
+          this.gameOver(true);
         }
+      }
     }
-}
+    
+    resetGame() {
+      const ul = document.querySelector("#phrase ul");
+      ul.innerHTML = "";
+      const keys = document.querySelectorAll(".key");
+      for (let i = 0; i < keys.length; i++) {
+        keys[i].disabled = false;
+        keys[i].classList.remove("chosen", "wrong");
+      }
+      const hearts = document.querySelectorAll("#scoreboard ol li");
+      for (let i = 0; i < hearts.length; i++) {
+        if (hearts[i].classList != "tries") {
+          hearts[i].classList.add("tries");
+          hearts[i].firstChild.src = "images/liveHeart.png";
+        }
+      }
+    }
+  }
