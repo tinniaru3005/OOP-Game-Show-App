@@ -4,21 +4,19 @@ class Phrase {
     }
 
     addPhraseToDisplay() {
-        const phraseArr = document.getElementById('phrase');
-        const phrase_ul = document.querySelector('ul');
-        for(let i = 0; i < phraseArr.length; i++) {
-            if(phraseArr[i] === ' '){
-                const space_li = document.createElement('li');
-                space_li.className = 'space';
-                phrase_ul.append(space_li);
-            } else {   
-                const letter_li = document.createElement('li');
-                letter_li.className = 'hide letter';
-                letter_li.textContent = `${phraseArr[i]}`;
-                phrase_ul.append(letter_li);
+        for (let i = 0; i < this.phrase.length; i++) {
+            if (this.phrase.charAt(i) !== " ") {
+              const elementLi = document.createElement("li");
+              elementLi.setAttribute("class", `hide letter ${this.phrase.charAt(i)}`);
+              document.querySelector("div#phrase ul").appendChild(elementLi);
+              elementLi.textContent = `${this.phrase.charAt(i)}`;
+            } else {
+              const elementLi = document.createElement("li");
+              elementLi.setAttribute("class", `space`);
+              document.querySelector("div#phrase ul").appendChild(elementLi);
+              elementLi.textContent = " ";
             }
         }
-        return phrase_ul; 
     }
 
     checkLetter(letter) {
@@ -30,12 +28,14 @@ class Phrase {
     }
 
     showMatchedLetter(letter) {
-        const matchedLetters = document.getElementsByClassName("hide letter");
-        for(let i = 0; i < matchedLetters.length; i++) {
-            if(letter === matchedLetters[i].textContent){
-                matchedLetters[i].classList.add("show")
+        const displayLetter = document.getElementsByClassName('letter');
+        if (this.checkLetter(letter)) {
+            for (let i = 0; i < displayLetter.length; i++) {
+                if (displayLetter[i].classList.contains(letter)) {
+                displayLetter[i].classList.remove('hide');
+                displayLetter[i].classList.add('show');
+                }
             }
         }
     }
 }
-
