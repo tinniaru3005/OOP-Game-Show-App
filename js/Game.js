@@ -32,4 +32,14 @@ class Game {
             return false; 
         }
     }
+
+    removeLife() {
+        const heartsLeft = document.querySelectorAll('img');
+        if(this.missed < 4) {
+            heartsLeft[this.missed].src = 'images/lostHeart.png';
+            this.missed += 1
+        } else {
+            this.gameOver();
+        }
+    }
 }
