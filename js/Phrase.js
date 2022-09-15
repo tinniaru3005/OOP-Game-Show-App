@@ -2,6 +2,7 @@ class Phrase {
     constructor(phrase){
         this.phrase = phrase.toLowerCase();
     }
+
     addPhraseToDisplay() {
         const phraseArr = document.getElementById('phrase');
         const phrase_ul = document.querySelector('ul');
@@ -18,6 +19,14 @@ class Phrase {
             }
         }
         return phrase_ul; 
+    }
+
+    checkLetter(letter) {
+        if(this.phrase.includes(letter)) {
+            return true; 
+        } else {
+            return false; 
+        }
     }
 }
 
