@@ -59,7 +59,7 @@ class Game {
            gameOverMessage.innerHTML = `Congratulations! That's the correct phrase!`;
         } else {
             screenOverlay.className = 'lose';
-            gameOverMessage.innerHTML = `Sorry, That's not the correct phrase. Try again!`;
+            gameOverMessage.innerHTML = `Sorry, That's not the correct phrase. Try again.`;
         }
         this.resetGame();
     }
