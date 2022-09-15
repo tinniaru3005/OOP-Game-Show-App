@@ -28,5 +28,14 @@ class Phrase {
             return false; 
         }
     }
+
+    showMatchedLetter(letter) {
+        const matchedLetters = document.getElementsByClassName("hide letter");
+        for(let i = 0; i < matchedLetters.length; i++) {
+            if(letter === matchedLetters[i].textContent){
+                matchedLetters[i].classList.add("show")
+            }
+        }
+    }
 }
 
