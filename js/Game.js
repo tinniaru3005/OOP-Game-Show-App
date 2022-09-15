@@ -22,4 +22,14 @@ class Game {
         this.activePhrase = this.getRandomPhrase();
         return this.activePhrase.addPhraseToDisplay();
     }
+
+    checkForWin(letter) {
+        let phraseLetters = document.getElementsByClassName("letter");
+        let shownLetters = document.getElementsByClassName("show");
+        if(shownLetters.length === phraseLetters.length) {
+            return true; 
+        } else {
+            return false; 
+        }
+    }
 }
