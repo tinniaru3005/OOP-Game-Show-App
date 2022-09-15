@@ -33,6 +33,23 @@ class Game {
         }
     }
 
+    resetGame() {
+        const phrase = document.getElementById('phrase');
+        const resetHearts = document.querySelectorAll('.tries img');
+        const keyboard = document.getElementById('qwerty');
+        const button = qwerty.getElementsByTagName('button');
+        phrase.querySelector('ul').innerHTML = '';
+        this.missed = 0;
+        for (let i = 0; i < button.length; i++) {
+          button[i].disabled = false;
+          button[i].classList.remove('chosen', 'wrong');
+        }
+        for (let i = 0; i < resetHearts.length; i++) {
+          resetHearts[i].src = 'images/liveHeart.png';
+        }
+        this.missed = 0;
+    }
+    
     gameOver(gameWon) {
         const screenOverlay = document.getElementById("overlay");
         let gameOverMessage = document.getElementById('game-over-message');
