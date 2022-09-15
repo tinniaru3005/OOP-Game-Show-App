@@ -1,18 +1,16 @@
-let game = null;  
-const startButton = document.getElementById('btn__reset');
-const keys = document.getElementsByClassName('key');
-
-startButton.addEventListener('click', () => {
-    game = new Game()
-    game.startGame();
+let game;
+let buttonReset = document.querySelector("button#btn__reset");
+buttonReset.addEventListener("click", (e) => {
+  game = new Game();
+  game.resetGame();
+  game.startGame();
 });
 
-function buttonClicked() {
-    for(let i = 0; i < keys.length; i++) {
-        keys[i].addEventListener('click', (e) => {
-            const button = e.target;
-            game.handleInteraction(button);
-        })
-    };
-}
-buttonClicked();
+const keyboardButtons = document.getElementById("qwerty");
+
+keyboardButtons.addEventListener("click", (key) => {
+  const buttonSelected = key.target;
+  if (buttonSelected.className === "key") {
+    game.handleInteraction(key.target);
+  }
+});
