@@ -12,6 +12,16 @@ class Game {
         new Phrase("May the force be with you"),
         new Phrase("Be kind"),
         new Phrase("Dream big"),
+        new Phrase("Trust the timing of your life"),
+        new Phrase("Turn your wounds into wisdom"),
+        new Phrase("Your patience is your power"),
+        new Phrase("Choose to shine"),
+        new Phrase("Life is too short for bad vibes"),
+        new Phrase("Everyday is a new day"),
+        new Phrase("The only way out is through"),
+        new Phrase("All we have is now"),
+        new Phrase("Never stop learning"),
+        new Phrase("Be the reason someone smiled today")
       ];
       return phrases;
     }
@@ -55,11 +65,10 @@ class Game {
       const gameOverMessage = document.getElementById("game-over-message");
       if (gameWon) {
         overLay.className = "win";
-        gameOverMessage.textContent =
-          "Can you guess the phrase Winner? Congratulations !!";
+        gameOverMessage.textContent = "Congratulations !! You won the game.";
       } else {
         overLay.className = "lose";
-        gameOverMessage.textContent = "Sorry try again";
+        gameOverMessage.textContent = "Sorry... Try again.";
       }
     }
     
