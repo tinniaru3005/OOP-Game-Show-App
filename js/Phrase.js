@@ -4,19 +4,22 @@ class Phrase {
     }
 
     addPhraseToDisplay() {
-        for (let i = 0; i < this.phrase.length; i++) {
-            if (this.phrase.charAt(i) !== " ") {
-              const elementLi = document.createElement("li");
-              elementLi.setAttribute("class", `hide letter ${this.phrase.charAt(i)}`);
-              document.querySelector("div#phrase ul").appendChild(elementLi);
-              elementLi.textContent = `${this.phrase.charAt(i)}`;
+        const charArray = this.phrase.split('');
+    
+        charArray.forEach(character => {
+            const ul = document.querySelector('ul');
+            const li = document.createElement('li');
+            li.textContent = character;
+    
+            if (character === ' ') {
+                li.classList.add('space');
             } else {
-              const elementLi = document.createElement("li");
-              elementLi.setAttribute("class", `space`);
-              document.querySelector("div#phrase ul").appendChild(elementLi);
-              elementLi.textContent = " ";
+                li.classList.add('letter');
+                li.classList.add('hide');
+                li.classList.add(character);
             }
-        }
+            ul.appendChild(li);
+        });
     }
 
     checkLetter(letter) {
