@@ -1,4 +1,4 @@
-# OOP-Game-Show-App
+# 🕹️ OOP-Game-Show-App
 
 ## Phrase Hunter Game
 
@@ -13,5 +13,5 @@
 - If you can guess all the letters in the phrase before the hearts finish, you win!
 ![6](https://user-images.githubusercontent.com/62856848/194722097-83c9ad1b-0da8-4dde-b282-47c5af3e6ad1.png)
 
-## Try it out
+## ✨ Try it out
 [Phrase Hunter Game](https://tinniaru3005.github.io/OOP-Game-Show-App/)
